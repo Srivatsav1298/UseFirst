@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    image: use-first:local
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      PGLITE_DATA_DIR: /app/data/pglite
+      SESSION_TTL_DAYS: ${SESSION_TTL_DAYS:-30}
+    volumes:
+      - use-first-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  use-first-data:
